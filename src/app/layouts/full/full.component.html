@@ -1,0 +1,58 @@
+<div autosize autoFocus [ngClass]="{
+    'sidebarNav-mini': options.sidenavCollapsed && options.navPos !== 'top',
+    'sidebarNav-horizontal': options.horizontal,
+    cardBorder: options.cardBorder,
+    orange_theme: options.activeTheme == 'orange_theme',
+    blue_theme: options.activeTheme == 'blue_theme',
+    aqua_theme: options.activeTheme == 'aqua_theme',
+    purple_theme: options.activeTheme == 'purple_theme',
+    green_theme: options.activeTheme == 'green_theme',
+    cyan_theme: options.activeTheme == 'cyan_theme'
+  }" [dir]="options.dir!">
+    <!-- ============================================================== -->
+    <!-- VerticalHeader -->
+    <!-- ============================================================== -->
+    <ng-container *ngIf="!options.horizontal; else horizontalheader">
+
+    </ng-container>
+
+    <!-- horizontal header -->
+    <ng-template #horizontalheader>
+
+    </ng-template>
+
+    <mat-sidenav-container class="mainWrapper">
+        <!-- ============================================================== -->
+        <!-- Vertical Sidebar -->
+        <!-- ============================================================== -->
+
+
+        <!-- ============================================================== -->
+        <!-- horizontal Sidebar -->
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- Main Content -->
+        <!-- ============================================================== -->
+        <mat-sidenav-content class="contentWrapper">
+            <app-horizontal-sidebar *ngIf="options.horizontal"></app-horizontal-sidebar>
+
+            <main class="pageWrapper" [ngClass]="{
+          maxWidth: options.boxed
+        }">
+
+                <!-- ============================================================== -->
+                <!-- Outlet -->
+                <!-- ============================================================== -->
+                <router-outlet></router-outlet>
+
+            </main>
+        </mat-sidenav-content>
+        <!-- ============================================================== -->
+        <!-- Customizer -->
+        <!-- ============================================================== -->
+        <mat-sidenav #customizerRight mode="over" position="end" class="fixed-customizer">
+            <app-customizer (optionsChange)="receiveOptions($event)"></app-customizer>
+        </mat-sidenav>
+    </mat-sidenav-container>
+</div>
